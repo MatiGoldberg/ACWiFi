@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Time', 'Temperature'],
+          ['18:41',  27.8],
+          ['18:43',  27.2],
+          ['18:44',  26.9],
+          ['18:50',  26.1],
+		  ['18:51',  25.3],
+		  ['18:53',  26.5]
+        ]);
+
+        var options = {
+          title: 'Temperature over time',
+          hAxis: {title: 'Time',  titleTextStyle: {color: '#333'}},
+          vAxis: {minValue: 20}
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="chart_div" style="width: 800px; height: 200px;"></div>
+  </body>
+</html>

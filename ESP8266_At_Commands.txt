@@ -1,0 +1,10 @@
+
+check comm.				AT\r\n						AT\r\r\n\r\nOK\r\n
+Scan networks.			AT+CWLAP\r\n				AT+CWLAP\r\r\n+CWLAP:(<ch>,<ssid>,<rx>,<bssid>,<ch>)\r\n+CWLAP:(...)\r\n...\r\nOK\r\n
+
+Associate to AP
+~~~~~~~~~~~~~~~
+Set OP Mode: Client		AT+CWMODE=1\r\n				AT+CWMODE=1\r\r\n\r\nOK\r\n
+													AT+CWMODE=1\r\r\n\no change\r\n
+
+Join AP					AT+CWJAP="<ssid>","<psk>"	AT+CWJAP="<ssid>","<psk>"\r\r\n\r\nOK\r\n

@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+{% block body %}
+{% if session.logged_in %}
+	<div>Last seen on <em>{{last_seen_on}}</em></div>
+
+	<div>
+		Current system state is: <em>{{sys_state}}</em>
+        {% if sys_state == "ON" %}
+        [{{on_time}}]
+        {% endif %}
+	</div>
+
+	<form action="{{ url_for('post_state') }}" method=post class=add-entry style="float:left">
+		<dl>
+			<dt>Set Temperature
+			<dd><input class="slider" type="range" min=10 max=25 step=1 value={{sys_temp}} onchange="rangevalue.value=value" name="temperature"/>
+			<output id="rangevalue">{{sys_temp}}</output>°C 
+		</dl>
+		
+		<div class="onoffswitch">
+		<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" {{isChecked}}>
+		<label class="onoffswitch-label" for="myonoffswitch">
+			<div class="onoffswitch-inner"></div>
+			<div class="onoffswitch-switch"></div>
+		</label>
+		</div>
+		
+		<dl>
+			<input class="button" type=submit value="SEND">
+		</dl>
+		
+	</form>
+
+	<div class=temp-display style="float:left">
+		{{room_temp}}°C  
+	</div>
+	
+	{% if (room_temp|int < 25) %}
+	<div class=gauge style="float:left">  
+		<img src="{{ url_for('static', filename='cold.png') }}" height=82 width=26>
+	</div>
+	{% else %}
+	<div class=gauge style="float:left">  
+		<img src="{{ url_for('static', filename='hot.png') }}" height=82 width=26>
+	</div>
+	{% endif %}
+	
+	<div class=temp-display-small style="float:left">
+	<em>{{room_temp_time_stamp}}</em>
+	</div>
+
+    <div class=temp-display-small style="float:left">
+        <a href="{{ url_for('plot_temp') }}">plot temperatures...</a>
+    </div>
+
+	<ul class=entries>
+	{% for entry in entries %}
+		<li>{{ entry.ttime }} <em>{{ entry.temp }}°C  </em>
+	{% else %}
+		<li><em>Unbelievable.  No entries here so far</em>
+	{% endfor %}
+	</ul>
+
+{% endif %}
+{% endblock %}
