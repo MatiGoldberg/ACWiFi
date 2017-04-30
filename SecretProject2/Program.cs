@@ -627,8 +627,8 @@ namespace SecretProject2
 
     class Defines
     {
-        public const string SSID = "LoremIpsum_2.4";
-        public const string PASSPHRASE = "3110671243";
+        public const string SSID = "MySSID";
+        public const string PASSPHRASE = "KeyPhrase";
         public const string SYSIP = "10.0.0.10";
         
         // Development Env.
